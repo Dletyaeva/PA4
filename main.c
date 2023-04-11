@@ -10,6 +10,7 @@
 */
 
 void main (int argc, char **argv){
+    double const MPH[4] = {60.0, 70.0, 80.0}; //also the velocity in the equation
 
     //check that user enters in/out file name
     if(argc != 3){ //FIXME LATER

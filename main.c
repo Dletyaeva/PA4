@@ -14,8 +14,9 @@ void main (int argc, char **argv){
 
     printf("WELCOME TO GROUP 15's AUTO POWER CALCULATOR!!!  !\n");
     printf("reading the input file %s\n", argv[1]);
+    
     //check that user enters in/out file name
-    if(argc != 3){ //FIXME LATER
+    if(argc != 3){ 
     printf("Usage: enter input file name and output filename after %s\n", argv[0]);
     exit(1);
     }
@@ -48,6 +49,11 @@ void main (int argc, char **argv){
             carArray[i] = (Car*) malloc (sizeof(Car) * SIZE_ELE); // allocated memory for each element in the general array
         }
     
+    Car **sortedArray = (Car**)malloc(sizeof(Car*) * count); //contains only elements which have a positive drag area
+        for(int j = 0; j < count; j++){
+            sortedArray[j] = (Car*)malloc(sizeof(Car) * SIZE_ELE);
+        }
+    
     //velocity
     double *VEL = (double*)malloc(sizeof(double) * 4); 
     for (int i = 0; i < 4; i++){
@@ -75,10 +81,7 @@ void main (int argc, char **argv){
         printf("---- found %d cars with positive drag area - distributing data to %s\n", count, argv[2]);
     }
 
-    Car **sortedArray = (Car**)malloc(sizeof(Car*) * count);
-        for(int j = 0; j < count; j++){
-            sortedArray[j] = (Car*)malloc(sizeof(Car) * SIZE_ELE);
-        }
+   
    
     //sort the old array into new one
     //put into a function later

@@ -16,7 +16,6 @@ typedef struct Car_struct{
 }Car;
 
 
-//pre-reads the input file to figure out how many rows it has ==> how big general array needs to be
 int getFileRows(char *BUFFER, FILE *inputFile){
     int i = 0;
     while(fgets(BUFFER, 200, inputFile) != NULL){
@@ -26,7 +25,7 @@ int getFileRows(char *BUFFER, FILE *inputFile){
 return i;
 }
 
-//function to process information by car
+
 void subdivideCarsFromInput(char const *inFILE, Car **carArray, int const SIZE_ELE, int const SIZE_ARR, char *BUFFER){
     FILE *inputFile = fopen(inFILE, "r");
 
@@ -48,7 +47,7 @@ void subdivideCarsFromInput(char const *inFILE, Car **carArray, int const SIZE_E
     fclose(inputFile);
     }
 
-//sorts the old car array into a new array with cars that have positive drag area
+
 int countPositive(Car **carArray, int const SIZE_ARR, int const SIZE_ELE){
        int count = 0;
         for(int i = 0; i < SIZE_ARR; i++){
@@ -92,7 +91,7 @@ void printToOutputFile(Car **sortedArray, int count, FILE *outputFile){
         fputs(sortedArray[i]->dragCo, outputFile);
         fputs(" , ", outputFile);
         fputs(sortedArray[i]->dragArea, outputFile);
-        fputs(" ,--------------------------------------------------------------", outputFile);
+        fputs(" , ", outputFile);
         for(int j =0; j < 2; j++){
             fputs(sortedArray[i]->power[j], outputFile);
             fputs(" , ", outputFile);
@@ -101,18 +100,6 @@ void printToOutputFile(Car **sortedArray, int count, FILE *outputFile){
         fputs("\n", outputFile);
     }
 }
-
-void printtoTerminal(Car **sortedArray, int count){
-    for(int i = 0; i < count; i++){
-    printf("what it is v2.0: ");
-        for(int j = 0; j < 3; j++){
-        printf("%s ", sortedArray[i]->power[j]);
-        }
-    printf("\n");
-    }
-}
-
-void printComparisons(Car **sortedArray, int count){}
 
 
 

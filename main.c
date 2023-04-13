@@ -48,7 +48,7 @@ void main (int argc, char **argv){
             carArray[i] = (Car*) malloc (sizeof(Car) * SIZE_ELE); // allocated memory for each element in the general array
         }
     
-    //velocity
+
     double *VEL = (double*)malloc(sizeof(double) * 4); 
     for (int i = 0; i < 4; i++){
         //init the array with MPH values
@@ -58,10 +58,6 @@ void main (int argc, char **argv){
         VEL[i] = VEL[i] * 0.44704;
     }
 
-    /*opens file in funciton
-    * process file by read input file line by line and store info in seperately
-    * closes file once done reading
-    */
     subdivideCarsFromInput(inFILE, carArray, SIZE_ELE, SIZE_ARR, BUFFER);
 
     //this variable is the value size for new array
@@ -79,29 +75,22 @@ void main (int argc, char **argv){
         for(int j = 0; j < count; j++){
             sortedArray[j] = (Car*)malloc(sizeof(Car) * SIZE_ELE);
         }
-   
-    //sort the old array into new one
-    //put into a function later
+
     eliminateCars(count, SIZE_ELE, SIZE_ARR, carArray, sortedArray);
     
-    //computes the power for each car using the array VEL that has the values for
-    //60, 70 and 80 and copies the information to sortedArray using magic of type conversions 
-    //note this function does not take individual values for MPH instead they are provided in VEL 
-    // in which they are then immediately converted to M/S
     computePower(sortedArray, count, VEL);
  
     //open output file
     FILE *outputFile = fopen(argv[2],"w");
 
-    //writes the data from Array to txt file
     printToOutputFile(sortedArray, count, outputFile);
-    //printtoTerminal(sortedArray, count);
-    //printComparisons(sortedArray, count);
+  
+    //prints the comparisons of the cars to terminal
     printf("Writing comparisons of drag area to power at 60 MPH\n");
         for(int j = 0; j < count; j++){ //corresponds to the columns
             for(int k=0; k < count; k++){
                 if((sortedArray[j]->dragArea > sortedArray[k]->dragArea) && (atof(sortedArray[j]->power[0]) < atof(sortedArray[k]->power[0]))){
-                printf("---- The drag area of %.6s  >  %.6s, but has lower power comsupation at 60 mph\n", sortedArray[k]->carName, sortedArray[j]->carName);
+                printf("---- The drag area of %s  >  %s, but has lower power comsupation at 60 mph\n", sortedArray[k]->carName, sortedArray[j]->carName);
                 }else{
                     continue;
                 }

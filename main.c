@@ -48,14 +48,7 @@ void main (int argc, char **argv){
         for(int i =0; i < SIZE_ARR; i++){
             carArray[i] = (Car*) malloc (sizeof(Car) * SIZE_ELE); // allocated memory for each element in the general array
         }
-    
-
-    Car **sortedArray = (Car**)malloc(sizeof(Car*) * count); //contains only elements which have a positive drag area
-        for(int j = 0; j < count; j++){
-            sortedArray[j] = (Car*)malloc(sizeof(Car) * SIZE_ELE);
-        }
-    
-    //velocity
+   //velocity
     double *VEL = (double*)malloc(sizeof(double) * 4); 
     for (int i = 0; i < 4; i++){
         //init the array with MPH values
@@ -70,6 +63,11 @@ void main (int argc, char **argv){
     //this variable is the value size for new array
     printf("---- Sorting out all cars that have positive drag area\n");
     int count = countPositive(carArray, SIZE_ARR, SIZE_ELE);
+      
+    Car **sortedArray = (Car**)malloc(sizeof(Car*) * count); //contains only elements which have a positive drag area
+        for(int j = 0; j < count; j++){
+            sortedArray[j] = (Car*)malloc(sizeof(Car) * SIZE_ELE);
+        }
     
     if(count == 0){
         printf("sorry, no cars were found with positive drag area - please input a different file");
